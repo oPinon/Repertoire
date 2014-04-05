@@ -20,6 +20,7 @@ void destroy_list(list_t list)
     {
       list_t to_erase = current;
       current = current->next;
+			free(to_erase->value);
       free(to_erase);
     }
   }
@@ -41,7 +42,7 @@ size_t size(list_t list)
 }
 
 // Find a value
-bool find(list_t list, int value)
+bool find(list_t list, entry_t* value)
 {
   if (list != NULL)
   {
@@ -55,7 +56,7 @@ bool find(list_t list, int value)
 }
 
 // Push a new value in front of the list.
-int push_front(list_t* list, int value)
+int push_front(list_t* list, entry_t* value)
 {
   // Allocate a new head.
   list_t new_head = malloc(sizeof(struct cell));
@@ -81,7 +82,7 @@ int push_front(list_t* list, int value)
 }
 
 // Remove the first value, and put it at the address pointed by value_ptr.
-int pop_front(list_t* list, int* value_ptr)
+int pop_front(list_t* list, entry_t** value_ptr)
 {
   if (*list != NULL)
   {
@@ -95,6 +96,7 @@ int pop_front(list_t* list, int* value_ptr)
     *list = (*list)->next;
 
     // Erase old head.
+		free(to_erase->value);
     free(to_erase);
 
     // Everything is OK.
@@ -108,7 +110,7 @@ int pop_front(list_t* list, int* value_ptr)
 }
 
 // Push a new value at the end of the list.
-int push_back(list_t* list, int value)
+int push_back(list_t* list, entry_t* value)
 {
   // The list is empty, push_front will do the work nicely.
   if (*list == NULL)
@@ -145,7 +147,7 @@ int push_back(list_t* list, int value)
 }
 
 // Remove the last value, and put it at the address pointed by value_ptr.
-int pop_back(list_t* list, int* value_ptr)
+int pop_back(list_t* list, entry_t** value_ptr)
 {
   if (*list != NULL)
   {
@@ -184,7 +186,7 @@ int pop_back(list_t* list, int* value_ptr)
   }
 }
 
-int erase(list_t* list, int value)
+int erase(list_t* list, entry_t* value)
 {
   if (*list != NULL)
   {
@@ -228,7 +230,7 @@ int erase(list_t* list, int value)
 
 // Apply a function pointer, whose name is 'fun', which takes an int as a parameter and returns
 // nothing.
-void apply(list_t list, void (*fun)(int))
+void apply(list_t list, void (*fun)(entry_t*))
 {
   while (list != NULL)
   {
@@ -236,16 +238,4 @@ void apply(list_t list, void (*fun)(int))
     (*fun)(list->value);
     list = list->next;
   }
-}
-
-// Print an integer. Used by apply().
-void print_value(int i)
-{
-  printf("%d ", i);
-}
-
-// Print the list.
-void print(list_t list)
-{
-  apply(list, &print_value);
 }
