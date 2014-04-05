@@ -1,6 +1,6 @@
 #include "listentry.h"
 
-bool eq_str ( char* s1, char* s2 ) {
+bool eq_str ( unsigned char* s1, unsigned char* s2 ) {
 	while( *s1 != '\0' ) {
 		if( *s1 != *s2 ) { return false; }
 		else { s1++; s2++; }

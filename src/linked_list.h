@@ -43,6 +43,8 @@ int erase(list_t*, entry_t* value);
 
 // Find a value.
 bool find(list_t, entry_t* value);
+bool find_by_name(list_t, unsigned char* value);
+bool find_by_surname(list_t, unsigned char* value);
 
 // Apply a function pointer, which takes an int as a parameter and returns
 // nothing.

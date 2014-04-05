@@ -55,6 +55,30 @@ bool find(list_t list, entry_t* value)
   return false;
 }
 
+bool find_by_name(list_t list, unsigned char* value) {
+	if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if( eq_str(list->value->name, value)) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+}
+
+bool find_by_surname(list_t list, unsigned char* value) {
+	if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if( eq_str(list->value->surname, value)) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+}
+
 // Push a new value in front of the list.
 int push_front(list_t* list, entry_t* value)
 {
