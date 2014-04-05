@@ -1,0 +1,14 @@
+CC     = clang
+CFLAGS = -Wall -Werror
+BINARIES = linked_list parser main
+
+all: $(BINARIES)
+
+$(BINARIES):
+	$(CC) $(CFLAGS) −o $@ $@.c
+
+clean:
+	rm -rf *.o
+
+distclean: clean
+	rm -rf $(BINARIES)
