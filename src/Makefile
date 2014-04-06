@@ -5,7 +5,7 @@ BINARIES = main linked_list parser
 all: $(BINARIES)
 
 $(BINARIES):
-	$(CC) $(CFLAGS) âˆ’o $@ $@.c
+	$(CC) $(CFLAGS) âˆ-o $@ $@.c
 
 clean:
 	rm -rf *.o

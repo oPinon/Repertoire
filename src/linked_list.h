@@ -1,13 +1,23 @@
 #ifndef _LINKED_LIST_H_
 #define _LINKED_LIST_H_
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+
+
+typedef struct _entry_t {
+	char* name;
+	char* surname;
+	char* tel;
+	char* address;
+} entry_t;
 
 // A linked list cell.
 struct cell
 {
   // The stored value.
-  int value;
+  entry_t value;
 
   // The next cell.
   struct cell* next;
@@ -26,26 +36,26 @@ void destroy_list(list_t list);
 size_t size(list_t list);
 
 // Push a new value in front of the list.
-int push_front(list_t* list, int value);
+int push_front(list_t* list, entry_t value);
 
 // Remove the first value, and put it at the address pointed by value_ptr.
-int pop_front(list_t* list, int* value_ptr);
+int pop_front(list_t* list, entry_t* value_ptr);
 
 // Push a new value at the end of the list.
-int push_back(list_t* list, int value);
+int push_back(list_t* list, entry_t value);
 
 // Remove the last value, and put it at the address pointed by value_ptr.
-int pop_back(list_t* list, int* value_ptr);
+int pop_back(list_t* list, entry_t* value_ptr);
 
 // Erase the given value.
-int erase(list_t*, int value);
+int erase(list_t*, entry_t value);
 
 // Find a value.
-bool find(list_t, int value);
+bool find(list_t, entry_t value);
 
 // Apply a function pointer, which takes an int as a parameter and returns
 // nothing.
-void apply(list_t list, void (*fun)(int));
+void apply(list_t list, void (*fun)(entry_t));
 
 // Print the list.
 void print(list_t list);

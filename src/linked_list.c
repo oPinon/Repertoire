@@ -40,22 +40,22 @@ size_t size(list_t list)
   return res;
 }
 
-// Find a value
-bool find(list_t list, int value)
-{
-  if (list != NULL)
-  {
-    while (list != NULL)
-    {
-      if(list->value == value) { return true; }
-      list = list->next;
-    }
-  }
-  return false;
-}
+//// Find a value
+//bool find(list_t list, entry_t value)
+//{
+//  if (list != NULL)
+//  {
+//    while (list != NULL)
+//    {
+//      if(list->value == value) { return true; }
+//      list = list->next;
+//    }
+//  }
+//  return false;
+//}
 
 // Push a new value in front of the list.
-int push_front(list_t* list, int value)
+int push_front(list_t* list, entry_t value)
 {
   // Allocate a new head.
   list_t new_head = malloc(sizeof(struct cell));
@@ -81,7 +81,7 @@ int push_front(list_t* list, int value)
 }
 
 // Remove the first value, and put it at the address pointed by value_ptr.
-int pop_front(list_t* list, int* value_ptr)
+int pop_front(list_t* list, entry_t* value_ptr)
 {
   if (*list != NULL)
   {
@@ -108,7 +108,7 @@ int pop_front(list_t* list, int* value_ptr)
 }
 
 // Push a new value at the end of the list.
-int push_back(list_t* list, int value)
+int push_back(list_t* list, entry_t value)
 {
   // The list is empty, push_front will do the work nicely.
   if (*list == NULL)
@@ -145,7 +145,7 @@ int push_back(list_t* list, int value)
 }
 
 // Remove the last value, and put it at the address pointed by value_ptr.
-int pop_back(list_t* list, int* value_ptr)
+int pop_back(list_t* list, entry_t* value_ptr)
 {
   if (*list != NULL)
   {
@@ -184,51 +184,51 @@ int pop_back(list_t* list, int* value_ptr)
   }
 }
 
-int erase(list_t* list, int value)
-{
-  if (*list != NULL)
-  {
-    // Loop until we found the last cell.
-    list_t previous = NULL;
-    list_t current = *list;
-    while (current != NULL && current->value != value)
-    {
-      previous = current;
-      current = current->next;
-    }
-
-    // End of list, value not found.
-    if (current == NULL)
-    {
-      return -1;
-    }
-
-    // Remove first element.
-    if (previous == NULL)
-    {
-      *list = current->next;
-    }
-    else
-    {
-      previous->next = current->next;
-    }
-
-    // Erase the last cell.
-    free(current);
-
-    // Everything is OK.
-    return 0;
-  }
-  else
-  {
-    // It's an error to pop the first value of an empty list.
-    return -1;
-  }
-}
+//int erase(list_t* list, entry_t value)
+//{
+//  if (*list != NULL)
+//  {
+//    // Loop until we found the last cell.
+//    list_t previous = NULL;
+//    list_t current = *list;
+//    while (current != NULL && current->value != value)
+//    {
+//      previous = current;
+//      current = current->next;
+//    }
+//
+//    // End of list, value not found.
+//    if (current == NULL)
+//    {
+//      return -1;
+//    }
+//
+//    // Remove first element.
+//    if (previous == NULL)
+//    {
+//      *list = current->next;
+//    }
+//    else
+//    {
+//      previous->next = current->next;
+//    }
+//
+//    // Erase the last cell.
+//    free(current);
+//
+//    // Everything is OK.
+//    return 0;
+//  }
+//  else
+//  {
+//    // It's an error to pop the first value of an empty list.
+//    return -1;
+//  }
+//}
 
 // Apply a function pointer, whose name is 'fun', which takes an int as a parameter and returns
 // nothing.
-void apply(list_t list, void (*fun)(int))
+void apply(list_t list, void (*fun)(entry_t))
 {
   while (list != NULL)
   {
@@ -239,9 +239,13 @@ void apply(list_t list, void (*fun)(int))
 }
 
 // Print an integer. Used by apply().
-void print_value(int i)
+void print_value(entry_t e)
 {
-  printf("%d ", i);
+			printf("Name: %s",e.name);	
+			printf("Surname: %s",e.surname);
+			printf("Tel: %s",e.tel);	
+			printf("Address: %s",e.address);	 
+			printf("\n");	 
 }
 
 // Print the list.
