@@ -81,3 +81,11 @@ unsigned long hash_table_size(hash_table_t* table) {
 	}
 	return toReturn;
 };
+
+void hash_table_print(hash_table_t* table) {
+	for(unsigned int i=0; i<table->size*table->size; i++) {
+		if(table->tab[i]!=NULL) {
+			print_list(table->tab[i]);
+		}
+	}
+};

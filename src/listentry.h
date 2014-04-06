@@ -13,6 +13,8 @@ bool eq_str ( unsigned char* s1, unsigned char* s2 );
 
 bool eq_entry ( entry_t* e1, entry_t* e2 );
 
+void print_entry(entry_t* entry);
+
 
 
 
