@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include "hash_table.h"
 
-unsigned long hash ( unsigned char * str ) {
+unsigned long hash ( unsigned char * str ) { // TODO does this work ?
 	unsigned long hash = 5381;
 	int c;
-	while ( c = * str ++) {
+	while ( (c = * str ++) ) {
 		hash = (( hash << 5) + hash ) + c ; /* hash * 33 + c */
 	}
 	return hash ;
 }
 
 // key is coded as : first_name + key_half_size * last_name
-unsigned long hash ( unsigned char * first_name, unsigned char * last_name, unsigned long key_half_size) {
+unsigned long hash_entry ( unsigned char * first_name, unsigned char * last_name, unsigned long key_half_size) {
 	return (hash(first_name) % key_half_size) + key_half_size*(hash(last_name) % key_half_size);
 };
 
@@ -39,9 +39,9 @@ void hash_table_destroy(hash_table_t* table) {
 	free(table);
 };
 
-bool hash_table_insert(hash_table_t* table, char* value) {
+bool hash_table_insert(hash_table_t* table, entry_t* value) {
 	if(table==NULL) { return false; }
-	unsigned long position = hash(value) % table->size;
+	unsigned long position = hash_entry(value->name, value->surname, table->size);
 	list_t* list = &table->tab[position];
 	if(!find(*list,value)) {
 		if(push_front(list,value)==0) { return true; }
@@ -49,25 +49,25 @@ bool hash_table_insert(hash_table_t* table, char* value) {
 	return false;	
 };
 
-bool hash_table_find_by_first_name(hash_table_t* table, char* value) {
+bool hash_table_find_by_name(hash_table_t* table, unsigned char* value) { //TODO would be better if it returned a list of the entries
 	if(table==NULL) { return false; }
 	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
-		if(find(*table->tab[i],value) { return true; } //TODO shall return the entry
+		if(find_by_name(table->tab[i],value)) { return true; }
 	}
 	return false;
 };
 
-bool hash_table_find_by_last_name(hash_table_t* table, char* value) {
+bool hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
 	if(table==NULL) { return false; }
-	for(unsigned long i = (hash(value)%table->size)*table->size; i < (hash(value)%table->size)*table->size + table->size; i++) {
-		if(find(*table->tab[i],value) { return true; } //TODO shall return the entry
+	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
+		if(find_by_surname(table->tab[i],value)) { return true; }
 	}
 	return false;
 };
 
-bool hash_table_remove(hash_table_t* table, //entry_ptr) { //TODO
+bool hash_table_remove(hash_table_t* table, entry_t* value) {
 	if(table==NULL) { return false; }
-	unsigned long position = hash(value) % table->size; // hash(entry_prt->name)....
+	unsigned long position = hash_entry(value->name, value->surname, table->size);
 	list_t* list = &table->tab[position];
 	if(erase(list,value)==0) { return true; }
 	return false;

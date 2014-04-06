@@ -20,6 +20,7 @@ void destroy_list(list_t list)
     {
       list_t to_erase = current;
       current = current->next;
+			free(to_erase->value);
       free(to_erase);
     }
   }
@@ -40,6 +41,7 @@ size_t size(list_t list)
   return res;
 }
 
+<<<<<<< HEAD
 //// Find a value
 //bool find(list_t list, entry_t value)
 //{
@@ -53,9 +55,52 @@ size_t size(list_t list)
 //  }
 //  return false;
 //}
+=======
+// Find a value
+bool find(list_t list, entry_t* value)
+{
+  if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if(list->value == value) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+}
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f
+
+bool find_by_name(list_t list, unsigned char* value) {
+	if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if( eq_str(list->value->name, value)) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+}
+
+bool find_by_surname(list_t list, unsigned char* value) {
+	if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if( eq_str(list->value->surname, value)) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+}
 
 // Push a new value in front of the list.
+<<<<<<< HEAD
 int push_front(list_t* list, entry_t value)
+=======
+int push_front(list_t* list, entry_t* value)
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f
 {
   // Allocate a new head.
   list_t new_head = malloc(sizeof(struct cell));
@@ -81,7 +126,11 @@ int push_front(list_t* list, entry_t value)
 }
 
 // Remove the first value, and put it at the address pointed by value_ptr.
+<<<<<<< HEAD
 int pop_front(list_t* list, entry_t* value_ptr)
+=======
+int pop_front(list_t* list, entry_t** value_ptr)
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f
 {
   if (*list != NULL)
   {
@@ -95,6 +144,7 @@ int pop_front(list_t* list, entry_t* value_ptr)
     *list = (*list)->next;
 
     // Erase old head.
+		free(to_erase->value);
     free(to_erase);
 
     // Everything is OK.
@@ -108,7 +158,11 @@ int pop_front(list_t* list, entry_t* value_ptr)
 }
 
 // Push a new value at the end of the list.
+<<<<<<< HEAD
 int push_back(list_t* list, entry_t value)
+=======
+int push_back(list_t* list, entry_t* value)
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f
 {
   // The list is empty, push_front will do the work nicely.
   if (*list == NULL)
@@ -145,7 +199,11 @@ int push_back(list_t* list, entry_t value)
 }
 
 // Remove the last value, and put it at the address pointed by value_ptr.
+<<<<<<< HEAD
 int pop_back(list_t* list, entry_t* value_ptr)
+=======
+int pop_back(list_t* list, entry_t** value_ptr)
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f
 {
   if (*list != NULL)
   {
@@ -184,6 +242,7 @@ int pop_back(list_t* list, entry_t* value_ptr)
   }
 }
 
+<<<<<<< HEAD
 //int erase(list_t* list, entry_t value)
 //{
 //  if (*list != NULL)
@@ -229,6 +288,53 @@ int pop_back(list_t* list, entry_t* value_ptr)
 // Apply a function pointer, whose name is 'fun', which takes an int as a parameter and returns
 // nothing.
 void apply(list_t list, void (*fun)(entry_t))
+=======
+int erase(list_t* list, entry_t* value)
+{
+  if (*list != NULL)
+  {
+    // Loop until we found the last cell.
+    list_t previous = NULL;
+    list_t current = *list;
+    while (current != NULL && current->value != value)
+    {
+      previous = current;
+      current = current->next;
+    }
+
+    // End of list, value not found.
+    if (current == NULL)
+    {
+      return -1;
+    }
+
+    // Remove first element.
+    if (previous == NULL)
+    {
+      *list = current->next;
+    }
+    else
+    {
+      previous->next = current->next;
+    }
+
+    // Erase the last cell.
+    free(current);
+
+    // Everything is OK.
+    return 0;
+  }
+  else
+  {
+    // It's an error to pop the first value of an empty list.
+    return -1;
+  }
+}
+
+// Apply a function pointer, whose name is 'fun', which takes an int as a parameter and returns
+// nothing.
+void apply(list_t list, void (*fun)(entry_t*))
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f
 {
   while (list != NULL)
   {
@@ -237,6 +343,7 @@ void apply(list_t list, void (*fun)(entry_t))
     list = list->next;
   }
 }
+<<<<<<< HEAD
 
 // Print an integer. Used by apply().
 void print_value(entry_t e)
@@ -253,3 +360,5 @@ void print(list_t list)
 {
   apply(list, &print_value);
 }
+=======
+>>>>>>> 9dabe3d649aa78eab56617c92af5468b6cd99c2f

@@ -1,11 +1,17 @@
 #pragma once
 
+#include <stdbool.h>
+
 typedef struct _entry_t {
-	char* name;
-	char* surname;
-	char* tel;
-	char* address;
+	unsigned char* name;
+	unsigned char* surname;
+	unsigned char* tel;
+	unsigned char* address;
 } entry_t;
+
+bool eq_str ( unsigned char* s1, unsigned char* s2 );
+
+bool eq_entry ( entry_t* e1, entry_t* e2 );
 
 
 
