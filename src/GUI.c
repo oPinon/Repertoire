@@ -2,16 +2,20 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "linked_list.h"
 #include "parser.h"
+#include "hash_table.h"
 
 int main(int argc, const char* argv[])
 {
 	printf("Welcome to NoteWorks\n********\n");
 	printf("Loading repertory.txt ...\n");
+	
+	hash_table_t* table = hash_table_init(100);
 	write();
-	list_t list = read();
-	if(list==NULL){
+	read(table);
+	
+	
+	if(table==NULL){
 		printf("Cannot read repertory.txt\nClosing...");
 		return -1;
 	}
@@ -75,6 +79,7 @@ int main(int argc, const char* argv[])
  						fgets(entry_p->data[4],1023,stdin);
    			      
                 //add entry to hashmap here
+                
    			      	free(entry_p);
    			} break;
    		
@@ -129,7 +134,7 @@ int main(int argc, const char* argv[])
    			      
    			} break;
    			
-   		     case 6: print(list); break;
+   		     case 6: hash_table_print(table); break;
 
    			default: printf("Invalid selection\n"); break;
    		
@@ -137,6 +142,6 @@ int main(int argc, const char* argv[])
   	 	}
   	}
      
-    destroy_list(list);
+    hash_table_destroy(table);
 	return 0;
 }

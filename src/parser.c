@@ -2,53 +2,60 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-#include "linked_list.h"
 #include "parser.h"
+#include "linked_list.h"
 
 
-list_t read() {
+
+void read(hash_table_t* table) {
   
 	FILE* f = fopen("repertory.txt","r");
-
-	parsed_entry* entries = malloc(500*sizeof(parsed_entry));
-	if(entries==NULL){
+	
+	parsed_entry* parsed = malloc(500*sizeof(parsed_entry));
+	if(parsed == NULL){
 		printf("Could not allow memory for parsing\n");
-		return NULL;
+		return;
 	}
 
 	unsigned int i=0;
-	fgets(entries[i].data[0],1023,f);
+	fgets(parsed [i].data[0],1023,f);
   
-	 while(entries[i].data[0][0]=='#'){
+	 while(parsed [i].data[0][0]=='#'){
 
- 		fgets(entries[i].data[1],1023,f);
- 		fgets(entries[i].data[2],1023,f);
- 		fgets(entries[i].data[3],1023,f);
- 		fgets(entries[i].data[4],1023,f);
+ 		fgets(parsed [i].data[1],1023,f);
+
+ 		fgets(parsed [i].data[2],1023,f);
+ 		fgets(parsed [i].data[3],1023,f);
+ 		fgets(parsed [i].data[4],1023,f);
 
    	 	i++;
 
- 		fgets(entries[i].data[0],1023,f);
+ 		fgets(parsed [i].data[0],1023,f);
  
 	}
 
-//convert to list
-	list_t people= init_list();  
+//convert to entries
+	
+	entry_t* entries=malloc(i*sizeof(entry_t));
 	
 	int j;
+	int k;
 	for(j=0;j<i;j++){
-		entry_t entry = {entries[j].data[1],
-						entries[j].data[2],
-						entries[j].data[3],
-						entries[j].data[4]};
+			for(k=1;k<=4;k++){
+	    		parsed[j].data[k][ strlen(parsed[j].data[k]) - 1 ] = '\0';  //suppress \n character
+	     }
+		 		printf("size: %d\n",strlen(parsed [j].data[1]));
+		entries->name= parsed [j].data[1];
+		entries->surname=	parsed [j].data[2];
+		entries->tel=	parsed [j].data[3];
+		entries->address=	parsed [j].data[4];
 						
-		push_front(&people,entry);
+		hash_table_insert(table,entries);
+		entries++;
 	}
 
 	fclose(f);
 
-	return people;
 }
 
 size_t length(char* chaine){
