@@ -10,10 +10,17 @@
 void read(hash_table_t* table) {
   
 	FILE* f = fopen("repertory.txt","r");
-	
+	if(f == NULL){
+		printf("Could not find repertory.txt\nCreating file...\n");
+		FILE* f = fopen("repertory.txt","r");
+		fclose(f);
+		return;
+	}
+
 	parsed_entry* parsed = malloc(500*sizeof(parsed_entry));
 	if(parsed == NULL){
 		printf("Could not allow memory for parsing\n");
+		fclose(f);
 		return;
 	}
 
@@ -23,7 +30,6 @@ void read(hash_table_t* table) {
 	 while(parsed [i].data[0][0]=='#'){
 
  		fgets(parsed [i].data[1],1023,f);
-
  		fgets(parsed [i].data[2],1023,f);
  		fgets(parsed [i].data[3],1023,f);
  		fgets(parsed [i].data[4],1023,f);
@@ -44,7 +50,7 @@ void read(hash_table_t* table) {
 			for(k=1;k<=4;k++){
 	    		parsed[j].data[k][ strlen(parsed[j].data[k]) - 1 ] = '\0';  //suppress \n character
 	     }
-		 		printf("size: %d\n",strlen(parsed [j].data[1]));
+	     
 		entries->name= parsed [j].data[1];
 		entries->surname=	parsed [j].data[2];
 		entries->tel=	parsed [j].data[3];
