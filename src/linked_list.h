@@ -29,6 +29,9 @@ size_t size(list_t list);
 // Push a new value in front of the list.
 int push_front(list_t* list, entry_t* value);
 
+// Append the second list at the end of the first one
+void append(list_t* l1, list_t* l2);
+
 // Remove the first value, and put it at the address pointed by value_ptr.
 int pop_front(list_t* list, entry_t** value_ptr);
 
@@ -43,8 +46,8 @@ int erase(list_t*, entry_t* value);
 
 // Find a value.
 bool find(list_t, entry_t* value);
-bool find_by_name(list_t, unsigned char* value);
-bool find_by_surname(list_t, unsigned char* value);
+list_t find_by_name(list_t, unsigned char* value);
+list_t find_by_surname(list_t, unsigned char* value);
 
 // Apply a function pointer, which takes an int as a parameter and returns
 // nothing.

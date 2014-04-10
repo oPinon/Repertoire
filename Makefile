@@ -3,8 +3,14 @@ CFLAGS = -Wall -O0 -g
 
 all: main
 
-main: build/hash_map_test.o build/linked_list.o build/hash_table.o build/listentry.o
+main: build/linked_list.o build/hash_table.o build/listentry.o build/parser.o build/GUI.o
 	$(CC) $(CFLAGS) $^ -o $@
+
+build/parser.o: src/parser.c
+	$(CC) $(CFLAGS) -o $@ -c src/parser.c
+
+build/GUI.o: src/GUI.c
+	$(CC) $(CFLAGS) -o $@ -c src/GUI.c
 
 build/hash_map_test.o: src/hash_map_test.c
 	$(CC) $(CFLAGS) -o $@ -c src/hash_map_test.c

@@ -55,28 +55,35 @@ bool find(list_t list, entry_t* value)
   return false;
 }
 
-bool find_by_name(list_t list, unsigned char* value) {
-	if (list != NULL)
+list_t find_by_name(list_t list, unsigned char* value) {
+	
+  list_t toReturn = init_list();
+  if (list != NULL)
   {
     while (list != NULL)
     {
-      if( eq_str(list->value->name, value)) { return true; }
+      if( eq_str(list->value->name, value)) {
+        push_front(&toReturn,list->value);
+      }
       list = list->next;
     }
   }
-  return false;
+  return toReturn;
 }
 
-bool find_by_surname(list_t list, unsigned char* value) {
-	if (list != NULL)
+list_t find_by_surname(list_t list, unsigned char* value) {
+	list_t toReturn = init_list();
+  if (list != NULL)
   {
     while (list != NULL)
     {
-      if( eq_str(list->value->surname, value)) { return true; }
+      if( eq_str(list->value->surname, value)) {
+        push_front(&toReturn,list->value);
+      }
       list = list->next;
     }
   }
-  return false;
+  return toReturn;
 }
 
 // Push a new value in front of the list.
@@ -167,6 +174,19 @@ int push_back(list_t* list, entry_t* value)
   {
     // Error, could not allocate.
     return -1;
+  }
+}
+
+
+void append(list_t* l1, list_t* l2) {
+  if(*l1 == NULL) { *l1=*l2; }
+  else {
+    list_t current = *l1;
+    while (current->next != NULL)
+    {
+      current = current->next;
+      current->next = *l2;
+    }
   }
 }
 

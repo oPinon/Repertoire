@@ -24,9 +24,9 @@ void hash_table_destroy(hash_table_t* table);
 // Insert a value in the hash table. It the insertion took place, true is returned, false otherwise.
 bool hash_table_insert(hash_table_t* table, entry_t* value);
 
-// Return true if the value was found, false otherwise.
-bool hash_table_find_by_name(hash_table_t* table, unsigned char* value);
-bool hash_table_find_by_surname(hash_table_t* table, unsigned char* value);
+// Return a linked_list of all the entries corresponding to that name
+list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value);
+list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value);
 
 // Remove a value in the hash table. It the deletion took place, true is returned, false otherwise.
 bool hash_table_remove(hash_table_t* table, entry_t* value);

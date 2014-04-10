@@ -49,20 +49,22 @@ bool hash_table_insert(hash_table_t* table, entry_t* value) {
 	return false;	
 };
 
-bool hash_table_find_by_name(hash_table_t* table, unsigned char* value) { //TODO would be better if it returned a list of the entries
+list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value) {
+	list_t toReturn = init_list();
 	if(table==NULL) { return false; }
 	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
-		if(find_by_name(table->tab[i],value)) { return true; }
+		append(toReturn,find_by_name(table->tab[i],value));
 	}
-	return false;
+	return toReturn;
 };
 
-bool hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
+list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
+	list_t toReturn = init_list();
 	if(table==NULL) { return false; }
 	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
-		if(find_by_surname(table->tab[i],value)) { return true; }
+		append(toReturn,find_by_surname(table->tab[i],value));
 	}
-	return false;
+	return toReturn;
 };
 
 bool hash_table_remove(hash_table_t* table, entry_t* value) {
