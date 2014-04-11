@@ -15,6 +15,9 @@ bool eq_entry ( entry_t* e1, entry_t* e2 );
 
 void print_entry(entry_t* entry);
 
+entry_t* init_entry();
+
+void destroy_entry(entry_t* entry);
 
 
 

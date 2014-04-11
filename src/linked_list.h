@@ -46,6 +46,10 @@ int erase(list_t*, entry_t* value);
 
 // Find a value.
 bool find(list_t, entry_t* value);
+
+bool has_name(list_t list, unsigned char* name);
+bool has_surname(list_t list, unsigned char* surname);
+
 list_t find_by_name(list_t, unsigned char* value);
 list_t find_by_surname(list_t, unsigned char* value);
 

@@ -20,7 +20,7 @@ void destroy_list(list_t list)
     {
       list_t to_erase = current;
       current = current->next;
-			free(to_erase->value);
+	  destroy_entry(to_erase->value);
       free(to_erase);
     }
   }
@@ -54,6 +54,33 @@ bool find(list_t list, entry_t* value)
   }
   return false;
 }
+
+bool has_name(list_t list, unsigned char* name){
+	if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if(eq_str(list->value->name , name)) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+	
+}
+
+bool has_surname(list_t list, unsigned char* surname){
+	if (list != NULL)
+  {
+    while (list != NULL)
+    {
+      if(eq_str(list->value->surname , surname)) { return true; }
+      list = list->next;
+    }
+  }
+  return false;
+	
+}
+
 
 list_t find_by_name(list_t list, unsigned char* value) {
 	
@@ -185,8 +212,8 @@ void append(list_t* l1, list_t* l2) {
     while (current->next != NULL)
     {
       current = current->next;
-      current->next = *l2;
-    }
+    
+    }  current->next = *l2;
   }
 }
 

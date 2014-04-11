@@ -52,18 +52,26 @@ bool hash_table_insert(hash_table_t* table, entry_t* value) {
 list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value) {
 	list_t toReturn = init_list();
 	if(table==NULL) { return false; }
-	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
-		append(toReturn,find_by_name(table->tab[i],value));
+	for(unsigned int i=0; i<table->size*table->size; i++) {
+		if(table->tab[i]!=NULL) {
+			list_t toappend = find_by_name(table->tab[i],value);
+			append(&toReturn,&toappend);
+		}
 	}
+
 	return toReturn;
 };
 
 list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
-	list_t toReturn = init_list();
+	list_t toReturn = init_list();	
 	if(table==NULL) { return false; }
-	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
-		append(toReturn,find_by_surname(table->tab[i],value));
+	for(unsigned int i=0; i<table->size*table->size; i++) {
+		if(table->tab[i]!=NULL) {
+			list_t toappend = find_by_surname(table->tab[i],value);
+			append(&toReturn,&toappend);
+		}
 	}
+
 	return toReturn;
 };
 

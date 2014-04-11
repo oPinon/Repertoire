@@ -1,5 +1,6 @@
 #include "listentry.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 bool eq_str ( unsigned char* s1, unsigned char* s2 ) {
 	while( *s1 != '\0' ) {
@@ -17,3 +18,20 @@ bool eq_entry ( entry_t* e1, entry_t* e2 ) {
 void print_entry(entry_t* entry) {
 	printf("[ %s %s ] %s %s\n", entry->name, entry->surname, entry->tel, entry->address);
 };
+
+entry_t* init_entry(){
+	 entry_t* entry= malloc(sizeof(entry_t));
+	 entry->name = malloc(1023*sizeof(char));
+	 entry->surname = malloc(1023*sizeof(char));
+	 entry->tel = malloc(1023*sizeof(char));
+	 entry->address = malloc(1023*sizeof(char));
+	    return entry;
+}
+
+void destroy_entry(entry_t* entry){
+		 free(entry->name);
+		 free(entry->surname);
+		 free(entry->tel);
+		 free(entry->address);
+		 free(entry);
+}
