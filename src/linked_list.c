@@ -213,7 +213,8 @@ void append(list_t* l1, list_t* l2) {
     {
       current = current->next;
     
-    }  current->next = *l2;
+    }
+    current->next = *l2;
   }
 }
 

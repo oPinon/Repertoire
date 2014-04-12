@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "hash_table.h"
 
-unsigned long hash ( unsigned char * str ) { // TODO does this work ?
+unsigned long hash ( unsigned char * str ) {
 	unsigned long hash = 5381;
 	int c;
 	while ( (c = * str ++) ) {
@@ -19,7 +19,7 @@ hash_table_t* hash_table_init(unsigned long size) {
 	hash_table_t* toReturn = malloc(sizeof(hash_table_t));
 	if(toReturn != NULL) {
 		toReturn->size = size;
-		toReturn->tab = malloc(sizeof(list_t)*(size*size)); //TODO is that the correct size ?
+		toReturn->tab = malloc(sizeof(list_t)*(size*size));
 		if(toReturn->tab == NULL) { return NULL; }
 		else {
 			for(unsigned long i=0; i<size; i++) {
@@ -49,29 +49,23 @@ bool hash_table_insert(hash_table_t* table, entry_t* value) {
 	return false;	
 };
 
-list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value) {
+list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
 	list_t toReturn = init_list();
 	if(table==NULL) { return false; }
-	for(unsigned int i=0; i<table->size*table->size; i++) {
-		if(table->tab[i]!=NULL) {
-			list_t toappend = find_by_name(table->tab[i],value);
-			append(&toReturn,&toappend);
-		}
+	for(unsigned long i = (hash(value)%table->size)*table->size; i < (hash(value)%table->size)*table->size + table->size; i++) {
+ 		list_t toAppend = find_by_surname(table->tab[i],value);
+ 		append(&toReturn, &toAppend);
 	}
-
 	return toReturn;
 };
 
-list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
+list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value) {
 	list_t toReturn = init_list();	
 	if(table==NULL) { return false; }
-	for(unsigned int i=0; i<table->size*table->size; i++) {
-		if(table->tab[i]!=NULL) {
-			list_t toappend = find_by_surname(table->tab[i],value);
-			append(&toReturn,&toappend);
-		}
-	}
-
+ 	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {
+ 		list_t toAppend = find_by_name(table->tab[i],value);
+ 		append(&toReturn, &toAppend);
+ 	}
 	return toReturn;
 };
 
