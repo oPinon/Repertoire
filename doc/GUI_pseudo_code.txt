@@ -1,0 +1,42 @@
+Welcome to NoteWorks !
+This softwares allows you to store and modify a repertoire.
+Please enter a number to continue :
+
+1 = Display all
+2 = Search by name
+3 = Add
+4 = Save
+5 = Quit
+Your command >> ?
+
+if(Display all) : print(all)
+
+if(Search by name) :
+	1 = Search by family name
+	2 = Search by surname
+
+	print(results) :
+		1 = Erase an entry
+		2 = Main menu
+
+		if(Erase an entry)
+			print(all+number)
+			Which entry to erase ?
+
+if(Add) :
+	Please enter the family name >>
+		Please enter the surname >>
+			Please enter a phone number >>
+				Please enter an email address >>
+
+if(Save) :
+	Your repertoire was save to C:/...
+
+if(Quit) :
+	Do you want to save before leaving ?
+	1 = yes
+	2 = no
+
+	See you soon !
+
+
