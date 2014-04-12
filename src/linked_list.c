@@ -288,8 +288,9 @@ int erase(list_t* list, entry_t* value)
     }
 
     // Erase the last cell.
+    destroy_entry(current->value);
     free(current);
-
+    
     // Everything is OK.
     return 0;
   }
@@ -314,4 +315,17 @@ void apply(list_t list, void (*fun)(entry_t*))
 
 void print_list(list_t list) {
 	apply(list, &print_entry);
+}
+
+entry_t* get(list_t list, unsigned int value){
+	if(value >= size(list)) return NULL;
+	entry_t* result = list->value;
+	
+	for(unsigned int i=0; i<value; i++){
+		 list = list->next;
+		 result = list->value;
+	}
+	
+	return result;
+   
 }

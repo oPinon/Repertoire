@@ -3,8 +3,8 @@
 
 #include "hash_table.h"
 
-void read(hash_table_t* table);
-void write(hash_table_t* table);
+void read(hash_table_t* table, const char* filename);
+void write(hash_table_t* table, const char* filename);
 
 
 

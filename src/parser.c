@@ -5,12 +5,12 @@
 #include "parser.h"
 #include "linked_list.h"
 
-void read(hash_table_t* table) {
+void read(hash_table_t* table, const char* filename) {
   
-	FILE* f = fopen("repertory.txt","r");
+	FILE* f = fopen(filename,"r");
 	if(f == NULL){
-		printf("Could not find repertory.txt\nCreating file...\n");
-		FILE* f = fopen("repertory.txt","r");
+		printf("Could not find %s\nCreating file...\n",filename);
+		FILE* f = fopen(filename,"r");
 		fclose(f);
 		return;
 	}
@@ -43,9 +43,9 @@ void read(hash_table_t* table) {
 }
 
 
-void write(hash_table_t* table) { 
+void write(hash_table_t* table, const char* filename) { 
   
-FILE* f = fopen("repertory.txt","w");
+FILE* f = fopen(filename,"w");
 
 	for(unsigned int i=0; i<table->size*table->size; i++) {
 		if(table->tab[i]!=NULL) {

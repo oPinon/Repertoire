@@ -59,4 +59,6 @@ void apply(list_t list, void (*fun)(entry_t*));
 
 void print_list(list_t list);
 
+entry_t* get(list_t list, unsigned int value);
+
 #endif // _LINKED_LIST_H_
