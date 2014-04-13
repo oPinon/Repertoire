@@ -2,7 +2,7 @@
 #define _LINKED_LIST_H_
 
 #include <stdbool.h>
-#include "listentry.h"
+#include "entry.h"
 
 // A linked list cell.
 struct cell
