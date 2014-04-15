@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "linked_list.h"
-#include "listentry.h"
+#include "entry.h"
 
 struct _hash_table_t {
 	unsigned long size;

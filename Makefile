@@ -21,8 +21,8 @@ build/hash_table.o: src/hash_table.h src/hash_table.c
 build/linked_list.o: src/linked_list.h src/linked_list.c
 	$(CC) $(CFLAGS) -o $@ -c src/linked_list.c
 
-build/listentry.o: src/listentry.c src/listentry.h
-	$(CC) $(CFLAGS) -o $@ -c src/listentry.c
+build/entry.o: src/entry.c src/entry.h
+	$(CC) $(CFLAGS) -o $@ -c src/entry.c
 
 build/memory_leak_test.o: src/memory_leak_test.c
 	$(CC) $(CFLAGS) -o $@ -c src/memory_leak_test.c

@@ -9,7 +9,7 @@
 int main(int argc, const char* argv[])
 {
 	printf("Welcome to NoteWorks !\n********\n");
-	printf("This softwares allows you to store and modify a repertory.\n");
+	printf("This software allows you to store and modify a repertory.\n");
 	
 	const char* filename = argv[1];
 	if(argv[1]==NULL){
@@ -37,7 +37,7 @@ int main(int argc, const char* argv[])
 		printf("Please enter a number to continue :\n");
     
 		printf("(1): Display all\n");
-		printf("(2): Search by name\n");
+		printf("(2): Search-Modify-Erase\n");
 		printf("(3): Add\n");
 		printf("(4): Save\n");
 		printf("(5): Quit\n");
@@ -55,8 +55,8 @@ int main(int argc, const char* argv[])
 			
 			case 2: {
 				printf("\nEnter search criteria:\n");
-				printf("(1): Search by name\n");
-				printf("(2): Search by surname\n");
+				printf("(1): Search by first name\n");
+				printf("(2): Search by last name\n");
 				printf("\n>>");
    				char buffer[1023];
    				
@@ -70,44 +70,49 @@ int main(int argc, const char* argv[])
       			switch(choice){
       				
       				case 1: {
-						printf("Please enter entry name:\n");
+						printf("Please enter entry first name:\n");
 						printf("\n>>");
 					 	fgets(buffer,1023,stdin);
    			      	 	buffer[ strlen(buffer) - 1 ] = '\0';
    			      
-     			     	if(strlen(buffer)==0){
-   			      	  		printf("Name cannot be empty\n");
-   			      			break;
+     			     	while(strlen(buffer)==0){
+   			      	  		printf("First name cannot be empty\n");
+   			      	 		printf("\n>>");
+   			      	  		fgets(buffer,1023,stdin);
+   			      	 		buffer[ strlen(buffer) - 1 ] = '\0';
    			      		}
       					
       				  	check = hash_table_find_by_name(table, buffer);	
 						if(size(check)==0){
-   			   				printf("No such name found\n");
+   			   				printf("No such first name found\n");
    			   				break;
-   			  		 	}
-      					break;
-      				}
+   			  		 	}   				
+      				} break;
       				
       				case 2: {
-						printf("Please enter entry surname:\n");
+						printf("Please enter entry last name:\n");
 						printf("\n>>");
 					 	fgets(buffer,1023,stdin);
    			      	 	buffer[ strlen(buffer) - 1 ] = '\0';
    			      
-     			     	if(strlen(buffer)==0){
-   			      	  		printf("Surname cannot be empty\n");
-   			      			break;
+     			     	while(strlen(buffer)==0){
+   			      	  		printf("Last name cannot be empty\n");
+   			      			printf("\n>>");
+   			      	  		fgets(buffer,1023,stdin);
+   			      	 		buffer[ strlen(buffer) - 1 ] = '\0';
    			      		}
       					
       				  	check = hash_table_find_by_surname(table, buffer);	
 						if(size(check)==0){
-   			   				printf("No such surname found\n");
+   			   				printf("No such last name found\n");
    			   				break;
-   			  		 	}
-      					break;
-      				}
+   			  		 	}				
+      				} break;
       				
-      				default: printf("Invalid selection\n"); break;
+      				default: {
+      					printf("Invalid selection\n"); 
+						check=NULL; 
+      				} break;
 
 				}	 
 				
@@ -135,9 +140,9 @@ int main(int argc, const char* argv[])
 				bool modifying = true;
 				
 				while(modifying){ 
-					printf("Select an option:\n");
-      				printf("(1): Modify entry name\n");
-      				printf("(2): Modify entry surname\n");
+					printf("\nSelect an option:\n");
+      				printf("(1): Modify entry first name\n");
+      				printf("(2): Modify entry last name\n");
       				printf("(3): Modify entry phone number\n");
       				printf("(4): Modify entry address\n");
 					printf("(5): Erase entry\n");
@@ -153,15 +158,17 @@ int main(int argc, const char* argv[])
 						
     	 	    		case 1: {
   	 	    				char buffer[1023];
-  	 	    				printf("Please enter the new name:\n");
+  	 	    				printf("Please enter the new first name:\n");
   	 	    				printf("\n>>");
    			  		    	fgets(buffer,1023,stdin);
    			   				buffer[ strlen(buffer) - 1 ] = '\0';
    			      
-     			  			if(strlen(buffer)==0){
-   			      				printf("Name cannot be empty\n");
-   			      				break;
-							}
+     			     		while(strlen(buffer)==0){
+   			      	  			printf("First name cannot be empty\n");
+   			      	  			printf("\n>>");
+   			      	  			fgets(buffer,1023,stdin);
+   			      	 			buffer[ strlen(buffer) - 1 ] = '\0';
+   			      			}
 				
 							entry_p->name = strcpy(entry_p->name,buffer);
 							printf("The entry is now:\n");
@@ -171,15 +178,17 @@ int main(int argc, const char* argv[])
   	 	    	
   	 	  				case 2: {
   	 	  					char buffer[1023];
-  	 	   					printf("Please enter the new surname:\n");
+  	 	   					printf("Please enter the new last name:\n");
   	 	   					printf("\n>>");
    			   				fgets(buffer,1023,stdin);
    			   				buffer[ strlen(buffer) - 1 ] = '\0';
    			      
-     			  			if(strlen(buffer)==0){
-   			      				printf("Surname cannot be empty\n");
-   			      				break;
-							}
+     			 	    	while(strlen(buffer)==0){
+   			      	  			printf("Last name cannot be empty\n");
+   			      	  			printf("\n>>");
+   			      	  			fgets(buffer,1023,stdin);
+   			      	 			buffer[ strlen(buffer) - 1 ] = '\0';
+   			      			}
 				
 							entry_p->surname = strcpy(entry_p->surname,buffer);
 							printf("The entry is now:\n");
@@ -223,7 +232,8 @@ int main(int argc, const char* argv[])
    			      	
    			      			fgets(buffer,1023,stdin);
    			      			while(buffer[0]!='y' && buffer[0]!='n'){
-   			      				fgets(buffer,1023,stdin);
+   			      				printf("\n>>");
+								fgets(buffer,1023,stdin);		      				   				
    			     		 	}
    			      	
    			     		 	if(buffer[0]=='y'){
@@ -235,6 +245,8 @@ int main(int argc, const char* argv[])
   	 	   			 	}	break;
   	 	   			 	
   	 	   			 	case 6: modifying = false; break;
+  	 	   			 	
+  	 	   			 	default: printf("Invalid selection\n"); break;  
 												
 					}			
 														
@@ -246,32 +258,36 @@ int main(int argc, const char* argv[])
       		case 3: {
    			    entry_t* entry = init_entry();
    			      
-   			    printf("Please enter entry name:\n");
+   			    printf("Please enter entry first name:\n");
    			    printf("\n>>");
    			   	fgets(entry->name,1023,stdin);
    			   	entry->name[ strlen(entry->name) - 1 ] = '\0';
-   			    if(strlen(entry->name)==0){
-   			    	printf("Name cannot be empty\n");
-   			      	free(entry);
-   			      	break;
-				}
+   			   	
+     			while(strlen(entry->name)==0){
+   			    	printf("First name cannot be empty\n");
+   			      	printf("\n>>");
+   			      	fgets(entry->name,1023,stdin);
+   			      	entry->name[ strlen(entry->name) - 1 ] = '\0';
+   			    }
    			    
    			    
-   			    printf("Please enter entry surname:\n");
+   			    printf("Please enter entry last name:\n");
    			    printf("\n>>");
    			   	fgets(entry->surname,1023,stdin);
    			   	entry->surname[ strlen(entry->surname) - 1 ] = '\0';
-   			    if(strlen(entry->surname)==0){
-   			      	printf("Name cannot be empty\n");
-   			      	free(entry);
-   			      	break;
-				}
+   			   	
+     			while(strlen(entry->surname)==0){
+   			    	printf("Last name cannot be empty\n");
+   			      	printf("\n>>");
+   			     	fgets(entry->surname,1023,stdin);
+   			      	entry->surname[ strlen(entry->surname) - 1 ] = '\0';
+   			    }
 				
 				list_t check = hash_table_find_by_surname(table, entry->surname);
 
 				if(has_name(check,entry->name)){
 					printf("This name/surname combination already exists\n");
-					free(entry);
+					destroy_entry(entry);
 					break; 
 				}
 				
@@ -294,6 +310,7 @@ int main(int argc, const char* argv[])
     		case 4: {
     			printf("Saving %s...\n",filename);
    				write(table,filename);
+   				read(table,filename);
    				printf("Done\n");	
    			} break;
    			
@@ -305,7 +322,8 @@ int main(int argc, const char* argv[])
    				
    				fgets(buffer,1023,stdin);
    			    while(buffer[0]!='y' && buffer[0]!='n'){
-   			    	fgets(buffer,1023,stdin);
+   			    		printf("\n>>");
+						fgets(buffer,1023,stdin);
    			    }
    			      	
    			    if(buffer[0]=='y'){

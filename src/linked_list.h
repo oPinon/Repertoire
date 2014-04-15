@@ -3,7 +3,8 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include "listentry.h"
+#include "entry.h"
+#include "entry.h"
 
 // A linked list cell.
 struct cell

@@ -20,7 +20,7 @@ void destroy_list(list_t list)
     {
       list_t to_erase = current;
       current = current->next;
-	  destroy_entry(to_erase->value);
+	    destroy_entry(to_erase->value);
       free(to_erase);
     }
   }
