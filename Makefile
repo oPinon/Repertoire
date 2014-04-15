@@ -3,7 +3,7 @@ CFLAGS = -Wall -O0 -g
 
 all: main
 
-main: build/linked_list.o build/hash_table.o build/listentry.o build/parser.o build/GUI.o
+main: build/linked_list.o build/hash_table.o build/listentry.o build/parser.o build/hash_map_test.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 build/parser.o: src/parser.c
@@ -24,6 +24,9 @@ build/linked_list.o: src/linked_list.h src/linked_list.c
 build/listentry.o: src/listentry.c src/listentry.h
 	$(CC) $(CFLAGS) -o $@ -c src/listentry.c
 
+build/memory_leak_test.o: src/memory_leak_test.c
+	$(CC) $(CFLAGS) -o $@ -c src/memory_leak_test.c
+
 clean:
-	cd build
 	rm -rf *.o
+	rm -rf build/*.o

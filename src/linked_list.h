@@ -2,6 +2,7 @@
 #define _LINKED_LIST_H_
 
 #include <stdbool.h>
+#include <stdlib.h>
 #include "listentry.h"
 
 // A linked list cell.

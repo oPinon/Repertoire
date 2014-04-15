@@ -18,10 +18,12 @@ int main() {
 	list_t test = hash_table_find_by_name(people, (unsigned char*) "Durand");
 	printf("%s\n   ", "Is M.Durand here ?");
 	print_list(test);
+	destroy_list(test);
 
 	test = hash_table_find_by_surname(people, (unsigned char*) "Pierre-Alexandre");
 	printf("%s\n   ", "Is Pierre-Alexandre here ?");
 	print_list(test);
+	destroy_list(test);
 
 	hash_table_destroy( people );
 	
