@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "hash_table.h"
 
-unsigned long hash ( unsigned char * str ) {
+unsigned long hash ( char * str ) {
 	unsigned long hash = 5381;
 	int c;
 	while ( (c = * str ++) ) {
@@ -11,7 +11,7 @@ unsigned long hash ( unsigned char * str ) {
 }
 
 // key is coded as : first_name + key_half_size * last_name
-unsigned long hash_entry ( unsigned char * first_name, unsigned char * last_name, unsigned long key_half_size) {
+unsigned long hash_entry ( char * first_name, char * last_name, unsigned long key_half_size) {
 	return (hash(first_name) % key_half_size) + key_half_size*(hash(last_name) % key_half_size);
 };
 
@@ -49,7 +49,7 @@ bool hash_table_insert(hash_table_t* table, entry_t* value) {
 	return false;	
 };
 
-list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
+list_t hash_table_find_by_surname(hash_table_t* table, char* value) {
 	list_t toReturn = init_list();
 	if(table==NULL) { return false; }
 	for(unsigned long i = (hash(value)%table->size)*table->size; i < (hash(value)%table->size)*table->size + table->size; i++) {
@@ -59,7 +59,7 @@ list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value) {
 	return toReturn;
 };
 
-list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value) {
+list_t hash_table_find_by_name(hash_table_t* table, char* value) {
 	list_t toReturn = init_list();	
 	if(table==NULL) { return false; }
  	for(unsigned long i = hash(value)%table->size; i < table->size*table->size; i += table->size) {

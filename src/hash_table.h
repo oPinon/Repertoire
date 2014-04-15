@@ -11,9 +11,9 @@ struct _hash_table_t {
 };
 typedef struct _hash_table_t hash_table_t;
 
-unsigned long hash (unsigned char * str);
+unsigned long hash (char * str);
 
-unsigned long hash_entry (unsigned char * first_name, unsigned char * last_name, unsigned long key_half_size);
+unsigned long hash_entry (char * first_name, char * last_name, unsigned long key_half_size);
 
 // Initialize an hash table. Return NULL if it fails.
 hash_table_t* hash_table_init(unsigned long size);
@@ -25,8 +25,8 @@ void hash_table_destroy(hash_table_t* table);
 bool hash_table_insert(hash_table_t* table, entry_t* value);
 
 // Return a linked_list of all the entries corresponding to that name
-list_t hash_table_find_by_name(hash_table_t* table, unsigned char* value);
-list_t hash_table_find_by_surname(hash_table_t* table, unsigned char* value);
+list_t hash_table_find_by_name(hash_table_t* table, char* value);
+list_t hash_table_find_by_surname(hash_table_t* table, char* value);
 
 // Remove a value in the hash table. It the deletion took place, true is returned, false otherwise.
 bool hash_table_remove(hash_table_t* table, entry_t* value);

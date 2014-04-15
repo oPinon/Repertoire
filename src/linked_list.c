@@ -64,7 +64,7 @@ bool find(list_t list, entry_t* value)
   return false;
 }
 
-bool has_name(list_t list, unsigned char* name){
+bool has_name(list_t list, char* name){
 	if (list != NULL)
   {
     while (list != NULL)
@@ -77,7 +77,7 @@ bool has_name(list_t list, unsigned char* name){
 	
 }
 
-bool has_surname(list_t list, unsigned char* surname){
+bool has_surname(list_t list, char* surname){
 	if (list != NULL)
   {
     while (list != NULL)
@@ -91,7 +91,7 @@ bool has_surname(list_t list, unsigned char* surname){
 }
 
 
-list_t find_by_name(list_t list, unsigned char* value) {
+list_t find_by_name(list_t list, char* value) {
 	
   list_t toReturn = init_list();
   if (list != NULL)
@@ -107,7 +107,7 @@ list_t find_by_name(list_t list, unsigned char* value) {
   return toReturn;
 }
 
-list_t find_by_surname(list_t list, unsigned char* value) {
+list_t find_by_surname(list_t list, char* value) {
 	list_t toReturn = init_list();
   if (list != NULL)
   {
