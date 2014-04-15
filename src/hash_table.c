@@ -33,7 +33,7 @@ hash_table_t* hash_table_init(unsigned long size) {
 void hash_table_destroy(hash_table_t* table) {
 	if(table==NULL) { return; }	
 	for(unsigned long i=0; i<table->size*table->size; i++) {
-		destroy_list(table->tab[i]);
+		destroy_list_elements(table->tab[i]);
 	}
 	free(table->tab);
 	free(table);

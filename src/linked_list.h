@@ -4,7 +4,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "entry.h"
-#include "entry.h"
 
 // A linked list cell.
 struct cell
@@ -23,6 +22,7 @@ typedef struct cell* list_t;
 list_t init_list();
 
 // Erase a list.
+void destroy_list_elements(list_t list);
 void destroy_list(list_t list);
 
 // Compute the size of a list.

@@ -29,9 +29,9 @@ entry_t* init_entry(){
 }
 
 void destroy_entry(entry_t* entry){
-		 free(entry->name);
-		 free(entry->surname);
-		 free(entry->tel);
-		 free(entry->address);
-		 free(entry);
+	free(entry->name);
+	free(entry->surname);
+	free(entry->tel);
+	free(entry->address);
+	free(entry);
 }

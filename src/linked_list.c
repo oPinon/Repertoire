@@ -10,19 +10,28 @@ list_t init_list()
   return NULL;
 }
 
-// Erase a list.
+// Erase a list and its elements.
+void destroy_list_elements(list_t list)
+{
+  list_t current = list;
+  while (current != NULL)
+  {
+    list_t to_erase = current;
+    current = current->next;
+	  destroy_entry(to_erase->value);
+    free(to_erase);
+  }
+}
+
+// Erase a list but not its elements
 void destroy_list(list_t list)
 {
-  if (list != NULL)
+  list_t current = list;
+  while (current != NULL)
   {
-    list_t current = list;
-    while (current != NULL)
-    {
-      list_t to_erase = current;
-      current = current->next;
-	    destroy_entry(to_erase->value);
-      free(to_erase);
-    }
+    list_t to_erase = current;
+    current = current->next;
+    free(to_erase);
   }
 }
 
@@ -326,6 +335,5 @@ entry_t* get(list_t list, unsigned int value){
 		 result = list->value;
 	}
 	
-	return result;
-   
+	return result;  
 }

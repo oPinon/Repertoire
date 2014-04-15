@@ -25,9 +25,11 @@ int main() {
 	print_list(test);
 	destroy_list(test);
 
-	hash_table_destroy( people );
-	
 	printf("hash map test done\n");
+	hash_table_print(people);
+
+	hash_table_destroy( people );
+
 
 	return 0;
 };
