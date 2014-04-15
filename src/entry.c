@@ -16,16 +16,26 @@ bool eq_entry ( entry_t* e1, entry_t* e2 ) {
 };
 
 void print_entry(entry_t* entry) {
-	printf("[ %s %s ] %s %s\n", entry->name, entry->surname, entry->tel, entry->address);
+	if(entry!=NULL){
+		printf("[ %s %s ] %s %s\n", entry->name, entry->surname, entry->tel, entry->address);
+	}	
 };
 
 entry_t* init_entry(){
 	 entry_t* entry= malloc(sizeof(entry_t));
-	 entry->name = malloc(1023*sizeof(char));
-	 entry->surname = malloc(1023*sizeof(char));
-	 entry->tel = malloc(1023*sizeof(char));
-	 entry->address = malloc(1023*sizeof(char));
-	    return entry;
+	 if(entry==NULL) return NULL;
+	 
+	 entry->name = malloc(1024*sizeof(char));
+	 entry->surname = malloc(1024*sizeof(char));
+	 entry->tel = malloc(1024*sizeof(char));
+	 entry->address = malloc(1024*sizeof(char));
+	 
+	 if(entry->name==NULL || entry->surname==NULL || entry->tel==NULL || entry->address==NULL){
+	 	destroy_entry(entry);
+	 	return NULL;
+	 }
+	
+	return entry;
 }
 
 void destroy_entry(entry_t* entry){

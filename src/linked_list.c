@@ -18,7 +18,7 @@ void destroy_list_elements(list_t list)
   {
     list_t to_erase = current;
     current = current->next;
-	  destroy_entry(to_erase->value);
+	destroy_entry(to_erase->value);
     free(to_erase);
   }
 }
@@ -53,39 +53,36 @@ size_t size(list_t list)
 // Find a value
 bool find(list_t list, entry_t* value)
 {
-  if (list != NULL)
-  {
+	
     while (list != NULL)
     {
       if(list->value == value) { return true; }
       list = list->next;
     }
-  }
+
   return false;
 }
 
 bool has_name(list_t list, char* name){
-	if (list != NULL)
-  {
+
     while (list != NULL)
     {
       if(eq_str(list->value->name , name)) { return true; }
       list = list->next;
     }
-  }
+  
   return false;
 	
 }
 
 bool has_surname(list_t list, char* surname){
-	if (list != NULL)
-  {
+
     while (list != NULL)
     {
       if(eq_str(list->value->surname , surname)) { return true; }
       list = list->next;
     }
-  }
+  
   return false;
 	
 }
@@ -94,8 +91,7 @@ bool has_surname(list_t list, char* surname){
 list_t find_by_name(list_t list, char* value) {
 	
   list_t toReturn = init_list();
-  if (list != NULL)
-  {
+
     while (list != NULL)
     {
       if( eq_str(list->value->name, value)) {
@@ -103,14 +99,13 @@ list_t find_by_name(list_t list, char* value) {
       }
       list = list->next;
     }
-  }
+  
   return toReturn;
 }
 
 list_t find_by_surname(list_t list, char* value) {
 	list_t toReturn = init_list();
-  if (list != NULL)
-  {
+
     while (list != NULL)
     {
       if( eq_str(list->value->surname, value)) {
@@ -118,7 +113,7 @@ list_t find_by_surname(list_t list, char* value) {
       }
       list = list->next;
     }
-  }
+  
   return toReturn;
 }
 
@@ -310,13 +305,14 @@ int erase(list_t* list, entry_t* value)
   }
 }
 
-// Apply a function pointer, whose name is 'fun', which takes an int as a parameter and returns
+// Apply a function pointer, whose name is 'fun', which takes an entry pointer as a parameter and returns
 // nothing.
 void apply(list_t list, void (*fun)(entry_t*))
 {
   while (list != NULL)
   {
     // Apply the 'fun' function to the current cell's value.
+	print_entry(list->value);
     (*fun)(list->value);
     list = list->next;
   }

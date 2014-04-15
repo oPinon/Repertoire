@@ -43,9 +43,9 @@ bool hash_table_insert(hash_table_t* table, entry_t* value) {
 	if(table==NULL) { return false; }
 	unsigned long position = hash_entry(value->name, value->surname, table->size);
 	list_t* list = &table->tab[position];
-	if(!find(*list,value)) {
-		if(push_front(list,value)==0) { return true; }
-	}
+//	if(!find(*list,value)) {
+	if(push_front(list,value)==0) { return true; }
+//	}
 	return false;	
 };
 
@@ -87,6 +87,7 @@ unsigned long hash_table_size(hash_table_t* table) {
 };
 
 void hash_table_print(hash_table_t* table) {
+	if(table==NULL) return; 
 	for(unsigned int i=0; i<table->size*table->size; i++) {
 		if(table->tab[i]!=NULL) {
 			print_list(table->tab[i]);
