@@ -10,7 +10,8 @@ void read(hash_table_t* table, const char* filename) {
 	FILE* f = fopen(filename,"r");
 	if(f == NULL){
 		printf("Could not find %s\nCreating file...\n",filename);
-		FILE* f = fopen(filename,"r");
+		f = fopen(filename,"w");
+		fclose(f);
 		return;
 	}
 

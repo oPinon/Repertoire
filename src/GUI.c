@@ -127,14 +127,14 @@ int change_name(hash_table_t* table, entry_t* entry_p){
    	fgets(buffer,sizeof(buffer),stdin);
 	buffer[ strlen(buffer) - 1 ] = '\0';
    			      
-    while(strlen(buffer)==0){
+    	while(strlen(buffer)==0){
    		printf("First name cannot be empty\n");
    		printf("\n>>");
 		fgets(buffer,sizeof(buffer),stdin);
    		buffer[ strlen(buffer) - 1 ] = '\0';
    	}
    	
-   	if( has_combination(table, entry_p->name, entry_p->surname) ){
+   	if( has_combination(table, buffer, entry_p->surname) ){
 		printf("This name/surname combination already exists\n");
 		return -1;
 	}
@@ -161,7 +161,7 @@ int change_surname(hash_table_t* table, entry_t* entry_p){
    		buffer[ strlen(buffer) - 1 ] = '\0';
    	}
    	
-   	if( has_combination(table, entry_p->name, entry_p->surname) ){
+   	if( has_combination(table, entry_p->name, buffer) ){
 		printf("This name/surname combination already exists\n");
 		return -1;
 	}

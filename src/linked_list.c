@@ -312,7 +312,6 @@ void apply(list_t list, void (*fun)(entry_t*))
   while (list != NULL)
   {
     // Apply the 'fun' function to the current cell's value.
-	print_entry(list->value);
     (*fun)(list->value);
     list = list->next;
   }

@@ -9,10 +9,10 @@ main: build/linked_list.o build/hash_table.o build/entry.o build/parser.o build/
 build/main.o: src/main.c
 	$(CC) $(CFLAGS) -o $@ -c src/main.c
 	
-build/parser.o: src/parser.c
+build/parser.o: src/parser.h src/parser.c
 	$(CC) $(CFLAGS) -o $@ -c src/parser.c
 	
-build/gui.o: src/gui.c
+build/gui.o: src/gui.h src/gui.c
 	$(CC) $(CFLAGS) -o $@ -c src/gui.c
 
 build/hash_table.o: src/hash_table.h src/hash_table.c
@@ -21,7 +21,7 @@ build/hash_table.o: src/hash_table.h src/hash_table.c
 build/linked_list.o: src/linked_list.h src/linked_list.c
 	$(CC) $(CFLAGS) -o $@ -c src/linked_list.c
 
-build/entry.o: src/entry.c src/entry.h
+build/entry.o: src/entry.h src/entry.c
 	$(CC) $(CFLAGS) -o $@ -c src/entry.c
 
 build/memory_leak_test.o: src/memory_leak_test.c

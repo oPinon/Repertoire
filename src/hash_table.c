@@ -22,8 +22,8 @@ hash_table_t* hash_table_init(unsigned long size) {
 		toReturn->tab = malloc(sizeof(list_t)*(size*size));
 		if(toReturn->tab == NULL) { return NULL; }
 		else {
-			for(unsigned long i=0; i<size; i++) {
-				toReturn->tab[i] = NULL;
+			for(unsigned long i=0; i<size*size; i++) {
+				toReturn->tab[i] = init_list();
 			}
 		}
 	}
