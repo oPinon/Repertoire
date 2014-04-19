@@ -363,7 +363,7 @@ int run(const char* argv[])
 				}
 				
 				printf("The following entries were found:\n");		
-				print_list(check);
+				print_list_with_index(check);
 				
 				printf("Which one do you wish to interact with (0 is first)?\n");
 				printf("\n>>");	

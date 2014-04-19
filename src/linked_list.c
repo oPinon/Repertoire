@@ -321,6 +321,17 @@ void print_list(list_t list) {
 	apply(list, &print_entry);
 }
 
+void print_list_with_index(list_t list) {
+  unsigned long index = 0;
+  while (list != NULL) {
+    printf("%lu -> ",index);
+    print_entry(list->value);
+    index++;
+    list = list->next;
+  }
+}
+
+
 entry_t* get(list_t list, unsigned int value){
 	if(value >= size(list)) return NULL;
 	entry_t* result = list->value;

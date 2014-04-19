@@ -60,6 +60,7 @@ list_t find_by_surname(list_t, char* value);
 void apply(list_t list, void (*fun)(entry_t*));
 
 void print_list(list_t list);
+void print_list_with_index(list_t list);
 
 entry_t* get(list_t list, unsigned int value);
 
